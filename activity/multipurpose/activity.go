@@ -58,15 +58,18 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	var outPutFromFunc interface{}
 	funcExeFlag := false
 	if len(methodData) != 0 {
-		outPutFromFunc, err = methodData[input.MethodName](input.ToMap()["inputData"].(map[string]interface{}))
-		if err != nil {
-			ctx.Logger().Error("error in executing method: ", input.MethodName)
+		if val, ok := methodData[input.MethodName]; ok {
+			outPutFromFunc, err = val(input.ToMap()["inputData"].(map[string]interface{}))
+			if err != nil {
+				ctx.Logger().Error("error in executing method: ", input.MethodName)
+			} else {
+				funcExeFlag = true
+			}
 		} else {
-			funcExeFlag = true
+			ctx.Logger().Errorf("method(%s) not registerd to activity", input.MethodName)
 		}
 	} else {
-		funcExeFlag = true
-		ctx.Logger().Debug("methods not registerd to activity sending default response")
+		ctx.Logger().Error("methods not registerd to activity sending default response")
 	}
 
 	if !funcExeFlag {
