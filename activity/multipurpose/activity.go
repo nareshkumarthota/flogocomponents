@@ -17,8 +17,8 @@ var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 var methodData map[string]UserDefFunc
 
 // RegisterFuncs registers userdefined functions to methodData map
-func RegisterFuncs(methodName string, funcName UserDefFunc) {
-	methodData[methodName] = funcName
+func RegisterFuncs(methodName string, mthd UserDefFunc) {
+	methodData[methodName] = mthd
 }
 
 //New optional factory method, should be used if one activity instance per configuration is desired

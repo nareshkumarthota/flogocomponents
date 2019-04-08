@@ -14,15 +14,23 @@
   ],
   "input": [
     {
-      "name": "anInput",
+      "name": "methodName",
       "type": "string",
       "required": true
+    },
+    {
+      "name": "inputData",
+      "type": "any"
     }
   ],
   "output": [
     {
-      "name": "anOutput",
+      "name": "methodName",
       "type": "string"
+    },
+    {
+      "name": "outputData",
+      "type": "any"
     }
   ]
 }
