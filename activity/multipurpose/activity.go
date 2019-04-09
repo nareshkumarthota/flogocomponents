@@ -11,7 +11,7 @@ func init() {
 }
 
 // UserDefFunc signature for userdefined functions
-type UserDefFunc func(inputs map[string]interface{}) (map[string]interface{}, error)
+type UserDefFunc func(inputs interface{}) (map[string]interface{}, error)
 
 var activityMd = activity.ToMetadata(&Settings{}, &Input{}, &Output{})
 var methodData map[string]UserDefFunc
@@ -59,7 +59,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	funcExeFlag := false
 	if len(methodData) != 0 {
 		if val, ok := methodData[input.MethodName]; ok {
-			outPutFromFunc, err = val(input.ToMap()["inputData"].(map[string]interface{}))
+			outPutFromFunc, err = val(input.ToMap()["inputData"])
 			if err != nil {
 				ctx.Logger().Error("error in executing method: ", input.MethodName)
 			} else {
