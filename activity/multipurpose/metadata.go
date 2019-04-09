@@ -2,10 +2,6 @@ package multipurpose
 
 import "github.com/project-flogo/core/data/coerce"
 
-type Settings struct {
-	ASetting string `md:"aSetting,required"`
-}
-
 type Input struct {
 	MethodName string      `md:"methodName,required"`
 	InputData  interface{} `md:"inputData"`
