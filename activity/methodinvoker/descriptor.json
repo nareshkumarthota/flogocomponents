@@ -1,10 +1,10 @@
 {
-  "name": "sample-activity",
+  "name": "method-invoker-activity",
   "type": "flogo:activity",
   "version": "0.0.1",
-  "title": "Sample Activity",
-  "description": "Sample Activity",
-  "homepage": "https://github.com/nareshkumarthota/tree/master/flogocomponents/activity/multipurpose",
+  "title": "Method Invoker Activity",
+  "description": "Method Invoker Activity Invokes Userdefined Methods",
+  "homepage": "https://github.com/nareshkumarthota/tree/master/flogocomponents/activity/methodinvoker",
   "input": [
     {
       "name": "methodName",
@@ -13,7 +13,7 @@
     },
     {
       "name": "inputData",
-      "type": "map"
+      "type": "object"
     }
   ],
   "output": [

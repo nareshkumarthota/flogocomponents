@@ -1,4 +1,4 @@
-package multipurpose
+package methodinvoker
 
 import "github.com/project-flogo/core/data/coerce"
 

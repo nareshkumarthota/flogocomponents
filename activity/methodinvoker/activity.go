@@ -1,4 +1,4 @@
-package multipurpose
+package methodinvoker
 
 import (
 	"github.com/project-flogo/core/activity"
@@ -6,17 +6,17 @@ import (
 
 func init() {
 	_ = activity.Register(&Activity{})
-	methodData = make(map[string]UserDefFunc)
+	methodData = make(map[string]UserDefinedMethod)
 }
 
-// UserDefFunc signature for userdefined functions
-type UserDefFunc func(inputs interface{}) (map[string]interface{}, error)
+// UserDefinedMethod signature for userdefined methods
+type UserDefinedMethod func(inputs interface{}) (map[string]interface{}, error)
 
 var activityMd = activity.ToMetadata(&Input{}, &Output{})
-var methodData map[string]UserDefFunc
+var methodData map[string]UserDefinedMethod
 
-// RegisterFuncs registers userdefined functions to methodData map
-func RegisterFuncs(methodName string, mthd UserDefFunc) {
+// RegisterMethods registers userdefined functions to methodData map
+func RegisterMethods(methodName string, mthd UserDefinedMethod) {
 	methodData[methodName] = mthd
 }
 
@@ -49,7 +49,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 				funcExeFlag = true
 			}
 		} else {
-			ctx.Logger().Errorf("method(%s) not registerd to activity", input.MethodName)
+			ctx.Logger().Errorf("method[%s] not registerd to activity", input.MethodName)
 		}
 	} else {
 		ctx.Logger().Error("methods not registerd to activity sending default response")
@@ -57,7 +57,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 
 	if !funcExeFlag {
 		resp := make(map[string]interface{})
-		resp["response"] = "success message from activity"
+		resp["response"] = "success message from method invoke activity"
 		outPutFromFunc = resp
 	}
 
